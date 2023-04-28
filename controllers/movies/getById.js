@@ -1,7 +1,7 @@
-const Movie = require('../../models/movie');
+const { Movie } = require('../../models/movie');
 const { CreateError } = require('../../helpers');
 
-const getById = async (req, res) => {
+const getById = async (req, res, next) => {
   try {
     const { movieId } = req.params;
     const result = await Movie.findById(movieId);
@@ -10,8 +10,7 @@ const getById = async (req, res) => {
     }
     res.json(result);
   } catch (error) {
-    const { status = 500, message = 'Server Error' } = error;
-    res.status(status).json({ message });
+    next(error);
   }
 };
 
