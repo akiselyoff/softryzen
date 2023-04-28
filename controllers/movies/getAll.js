@@ -1,7 +1,7 @@
 const Movie = require('../../models/movie');
 
 const getAll = async (req, res) => {
-  const result = await Movie.find();
+  const result = await Movie.find({}, '-createdAt -updatedAt');
   res.json(result);
 };
 
