@@ -4,7 +4,7 @@ const Joi = require('joi').extend(require('@joi/date'));
 
 const movieSchema = new Schema(
   {
-    title: { type: String, required: true },
+    title: { type: String, unique: true, required: true },
     director: { type: String, required: true },
     release: {
       type: String,
