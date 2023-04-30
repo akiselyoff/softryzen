@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi').extend(require('@joi/date'));
 const { handleSchemaValidationError } = require('../helpers');
-const { string } = require('joi');
 // const dateFns = require('date-fns');
 
 const movieAddSchema = Joi.object({
