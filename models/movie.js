@@ -19,6 +19,10 @@ const movieSchema = new Schema(
       //   set: val => dateFns.parse(val, 'dd-MM-yyyy', new Date()),
       required: true,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+    },
   },
   { versionKey: false, timestamps: true }
 );
