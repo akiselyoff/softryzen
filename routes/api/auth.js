@@ -3,8 +3,9 @@ const router = express.Router();
 const controllers = require('../../controllers/auth');
 const { controllerWrapper } = require('../../helpers');
 const { validationBody } = require('../../middlewares');
-const { registerSchema } = require('../../models/user');
+const { registerSchema, loginSchema } = require('../../models/user');
 
 router.post('/register', validationBody(registerSchema), controllerWrapper(controllers.register));
+router.post('/login', validationBody(loginSchema), controllerWrapper(controllers.login));
 
 module.exports = router;
