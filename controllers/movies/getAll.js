@@ -7,7 +7,7 @@ const getAll = async (req, res) => {
   const result = await Movie.find({ owner: _id }, '-createdAt -updatedAt', {
     skip,
     limit,
-  }).populate('owner', 'email');
+  }).populate('owner', 'name');
   res.json(result);
 };
 

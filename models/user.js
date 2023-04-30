@@ -4,6 +4,7 @@ const { handleSchemaValidationError } = require('../helpers');
 const { mailRegex, passwordRegex } = require('../share/variables');
 
 const registerSchema = Joi.object({
+  name: Joi.string().required(),
   email: Joi.string()
     .pattern(mailRegex)
     .message('Wrong email format! Should be like a mail schema: example@mail.com')
@@ -32,6 +33,11 @@ const loginSchema = Joi.object({
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      unique: true,
+      required: true,
+    },
     email: {
       type: String,
       match: mailRegex,
