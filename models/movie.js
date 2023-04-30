@@ -1,6 +1,13 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi').extend(require('@joi/date'));
+const { handleSchemaValidationError } = require('../helpers');
 // const dateFns = require('date-fns');
+
+const movieAddSchema = Joi.object({
+  title: Joi.string().required(),
+  director: Joi.string().required(),
+  release: Joi.date().format('DD-MM-YYYY').less('now').required(),
+});
 
 const movieSchema = new Schema(
   {
@@ -16,12 +23,8 @@ const movieSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-const Movie = model('movie', movieSchema);
+movieSchema.post('save', handleSchemaValidationError);
 
-const movieAddSchema = Joi.object({
-  title: Joi.string().required(),
-  director: Joi.string().required(),
-  release: Joi.date().format('DD-MM-YYYY').less('now').required(),
-});
+const Movie = model('movie', movieSchema);
 
 module.exports = { Movie, movieAddSchema };
